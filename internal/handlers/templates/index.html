@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prewarm — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+    <span>Prewarm</span>
+  </div>
+  <div class="sidebar-server" id="serverInfo">
+    <div class="server-dot"></div>
+    <div class="server-detail">
+      <span class="server-name" id="serverName">Loading...</span>
+      <span class="server-domain" id="domainInfo"></span>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="nav-item active" href="#" data-tab="dashboard">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </a>
+    <a class="nav-item" href="#" data-tab="history">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      History
+    </a>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="ws-chip" id="wsChip">
+      <span class="ws-dot" id="wsDot"></span>
+      <span id="wsLabel">Offline</span>
+    </div>
+    <div id="stateBadge" class="badge badge-idle">IDLE</div>
+  </div>
+</aside>
+
+<!-- Main -->
+<main class="main">
+  <!-- Header -->
+  <header class="header">
+    <h1 id="pageTitle">Dashboard</h1>
+    <div class="header-right">
+      <div id="elapsedBadge" class="elapsed-badge"></div>
+    </div>
+  </header>
+
+  <!-- Dashboard Tab -->
+  <div class="tab-content active" id="tab-dashboard">
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-label">Total Media</span>
+        <span class="stat-number" id="totalMedia">0</span>
+        <div class="stat-spark"><div class="stat-spark-fill" id="progressBar"></div></div>
+        <span class="stat-sub" id="progressText">0 / 0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Pending</span>
+        <span class="stat-number orange" id="pending">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Done</span>
+        <span class="stat-number green" id="processed">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Hit Rate</span>
+        <span class="stat-number purple" id="hitRate">0%</span>
+        <div class="stat-detail">
+          <span class="green"><span id="totalHit">0</span> HIT</span>
+          <span class="orange"><span id="totalMiss">0</span> MISS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Jobs -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Active Jobs</h2>
+        <span class="pill" id="activeCount">0</span>
+      </div>
+      <div class="jobs-grid" id="jobsGrid">
+        <div class="empty-msg" id="jobsEmpty">Waiting for jobs...</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- History Tab -->
+  <div class="tab-content" id="tab-history">
+    <!-- Search & Controls -->
+    <div class="table-toolbar">
+      <div class="search-box">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" placeholder="Search posts..." id="searchInput" />
+      </div>
+      <span class="table-count" id="logCount">0 results</span>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+      <table class="data-table" id="historyTable">
+        <thead>
+          <tr>
+            <th class="sortable" data-sort="fileSlug">Name</th>
+            <th class="sortable" data-sort="resolution">Res</th>
+            <th class="sortable" data-sort="total">URLs</th>
+            <th class="sortable" data-sort="hit">HIT</th>
+            <th class="sortable" data-sort="miss">MISS</th>
+            <th class="sortable" data-sort="hitRate">Hit %</th>
+            <th class="sortable" data-sort="prewarmAt">Prewarmed</th>
+          </tr>
+        </thead>
+        <tbody id="historyBody"></tbody>
+      </table>
+    </div>
+    <div class="pagination" id="pageInfo"></div>
+  </div>
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
