@@ -373,9 +373,9 @@ func (m *Manager) runContinuous(ctx context.Context) {
 		}
 
 		if target == nil {
-			// Both types found nothing — wait 30s
+			// Both types found nothing — wait 5s
 			select {
-			case <-time.After(30 * time.Second):
+			case <-time.After(5 * time.Second):
 			case <-ctx.Done():
 				return
 			}

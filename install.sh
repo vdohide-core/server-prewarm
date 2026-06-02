@@ -13,7 +13,7 @@ BLUE='\033[0;34m'
 NC='\033[0m'
 
 # ─── Defaults ──────────────────────────────────────────────────────────────────
-PORT="8084"
+PORT="8086"
 MONGODB_URI=""
 LOG_PATH="logs/service.log"
 UNINSTALL=false
